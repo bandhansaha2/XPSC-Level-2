@@ -15,33 +15,31 @@ int main()
     int t; cin >> t;
     while(t--) {
         int n,k; cin >> n >> k;
-        vector<int>v(n);
-        map<int,int>mp;
+        vector<ll>v(n);
 
-        bool divisible = false;
         for(iton) {
             cin >> v[i];
-            if(v[i] % k == 0) divisible = true; 
-            mp[v[i]]++;
         }
 
-        if(divisible) {
-            cout << 0 << endl;
-            continue;
+        if(k==2 || k==3 || k==5) {
+            ll ans = 1e9;
+            for(auto x:v) {
+                ans = min(ans,k*((x+k-1)/k)-x);
+            }
+            cout << ans << endl;
         }
-
-        for(auto [x,y] : mp) {
-            cout << x << " ";
+        else {
+            ll ans = 1e9;
+            for(auto x:v) {
+                ans = min(ans,k*((x+k-1)/k)-x);
+            }
+            vector<ll> d;
+            for(auto it:v) {
+                d.push_back(2*((it+1)/2)-it);
+            }
+            sort(all(d));
+            cout << min(ans,d[0]+d[1]) << endl;
         }
-        cout << endl;
-        for(auto [x,y] : mp) {
-            cout << x % k << " ";
-        }
-        
-        
-        // for(iton) cout << v[i] << " ";
-        cout << endl;
-        cout << endl;
     }
 
     return 0;
